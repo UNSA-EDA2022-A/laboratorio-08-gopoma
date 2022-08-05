@@ -128,7 +128,7 @@ public class HashLinearProbing {
     public static void main (String[] args){
         HashLinearProbing tb = new HashLinearProbing(10);
 
-        Random rd = new Random();
+        Random rd = new Random(10);
 
         for(int i = 0; i < 5; i++){
             tb.insertHash(rd.nextInt(100));
