@@ -4,24 +4,45 @@ import java.util.Random;
 
 public class HashLinearProbing {
     private final int hsize; // tamaño total de la tabla hash
-    private final Integer[] buckets; // array que representa la tabla hash
-    private static final Integer AVAILABLE = Integer.MIN_VALUE; // constante que se le asigna a una celda de la tabla hash para indicar que NO está ocupada
+    private final Persona[] buckets; // array que representa la tabla hash
+    // * Es necesario redefinir AVAILABLE para trabajar con Persona
+    private static final String AVAILABLE = String.valueOf(Integer.MIN_VALUE); // constante que se le asigna a una celda de la tabla hash para indicar que NO está ocupada
     private int size; // cantidad actual de elementos en la tabla hash
 
     public HashLinearProbing(int hsize) {
-        this.buckets = new Integer[hsize];
+        this.buckets = new Persona[hsize];
         this.hsize = hsize;
         this.size = 0;
     }
 
     // Devuelve un valor entre 0 y hash-1, inclusive
-    public int hashing(int key) {
-        int hash = key % hsize;
-        if (hash < 0) { // mod en Lenguajes de Programación: En caso key sea un número negativo, hash también lo será, por lo tanto se normaliza a positivo sumándole hsize puesto a que el mínimo valor que puede tomar hash antes de la normalización es -hash + 1
-            hash += hsize;
+    public int hashing(String key) {
+        int input = 0;
+
+        for(char ch: key.toCharArray()) { 
+            input ^= ch; 
         }
+
+        int hash = input % hsize;
         return hash;
     }
+
+    public static void main(final String[] args) {
+        HashLinearProbing t = new HashLinearProbing(13);
+
+        for(int i = 0; i < 200; i++) {
+            String key = "";
+            for(int j = 0; j < 9; j++) {
+                key += String.valueOf((int)(Math.random() * 10));
+            }
+            System.out.println("_____________________________");
+            System.out.println("key: "+key);
+            System.out.println("hash: "+t.hashing(key));
+            System.out.println("_____________________________");
+        }
+    }
+
+    /*
 
     public boolean isFull() {        
         return size == hsize;
@@ -151,4 +172,6 @@ public class HashLinearProbing {
 
         tb.displayHashtable();        
     }
+
+    */
 }
