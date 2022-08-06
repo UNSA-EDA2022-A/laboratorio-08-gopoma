@@ -103,7 +103,7 @@ public class HashLinearProbing {
     public void displayHashtable() {
         for (int i = 0; i < hsize; i++) {
             // puede que la celda esté marcada como 'disponible' (Sin Valor)
-            if (buckets[i] == null || buckets[i] == AVAILABLE) {
+            if (buckets[i] == null || buckets[i].getDNI().equals(AVAILABLE)) {
                 System.out.println("Celda " + i + ": Vacia");
             } else {
                 System.out.println("Celda " + i + ": " + buckets[i].toString());
@@ -111,8 +111,7 @@ public class HashLinearProbing {
         }
     }
 
-    public int findHash(int key) {
-        Integer wrappedInt = key;
+    public int findHash(String key) {
         int hash = hashing(key);
 
         if (isEmpty()) {
@@ -124,7 +123,7 @@ public class HashLinearProbing {
         for (int i = 0; i < hsize; i++) {
             // Se utiliza un bloque try-catch para evitar el NullPointerException de alguna de las iteraciones
             try {
-                if (buckets[hash].equals(wrappedInt)) {
+                if (buckets[hash].getDNI().equals(key)) {
                     // buckets[hash] = AVAILABLE;
                     return hash;
                 }
@@ -142,15 +141,5 @@ public class HashLinearProbing {
         return -1;
     }    
 
-    public static void main (String[] args){
-        HashLinearProbing tb = new HashLinearProbing(10);
-
-        Random rd = new Random(10);
-
-        for(int i = 0; i < 5; i++){
-            tb.insertHash(rd.nextInt(100));
-        }
-
-        tb.displayHashtable();        
-    }
+    public static void main (final String[] args) { }
 }
