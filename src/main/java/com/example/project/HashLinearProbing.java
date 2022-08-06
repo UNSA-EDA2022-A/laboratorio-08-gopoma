@@ -111,12 +111,12 @@ public class HashLinearProbing {
         }
     }
 
-    public int findHash(String key) {
+    public String findHash(String key) {
         int hash = hashing(key);
 
         if (isEmpty()) {
             System.out.println("Tabla hash esta vacia!");
-            return -1;
+            return null;
         }
 
         // En Linear Probing se realizan a lo mucho 'hsize' saltitos para la búsqueda
@@ -125,7 +125,7 @@ public class HashLinearProbing {
             try {
                 if (buckets[hash].getDNI().equals(key)) {
                     // buckets[hash] = AVAILABLE;
-                    return hash;
+                    return buckets[hash].getNombre();
                 }
             } catch (Exception E) { }
 
@@ -138,7 +138,7 @@ public class HashLinearProbing {
         }
         // Después de los 'hsize' saltitos, se da por No Encontrada key
         System.out.println("Clave " + key + " no encontrada!");
-        return -1;
+        return null;
     }    
 
     public static void main (final String[] args) { }
