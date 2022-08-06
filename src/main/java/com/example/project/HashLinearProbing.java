@@ -27,42 +27,24 @@ public class HashLinearProbing {
         return hash;
     }
 
-    public static void main(final String[] args) {
-        HashLinearProbing t = new HashLinearProbing(13);
-
-        for(int i = 0; i < 200; i++) {
-            String key = "";
-            for(int j = 0; j < 9; j++) {
-                key += String.valueOf((int)(Math.random() * 10));
-            }
-            System.out.println("_____________________________");
-            System.out.println("key: "+key);
-            System.out.println("hash: "+t.hashing(key));
-            System.out.println("_____________________________");
-        }
-    }
-
-    /*
-
     public boolean isFull() {        
         return size == hsize;
     }
 
     // key->wrappedInt viene a ser un valor que se intertará como valor, cuya clave en la tabla hash será hashing(key)->[0,hsize-1]
-    public void insertHash(int key) {
-        Integer wrappedInt = key;
-        int hash = hashing(key);
-
+    public void insertHash(Persona key) {
         if (isFull()) {
             System.out.println("Tabla hash esta llena!");
             return;
         }
 
+        int hash = hashing(key.getDNI());
+
         // En Lineal Probing, en el peor de los casos se realizan 'hsize' saltitos
         for (int i = 0; i < hsize; i++) {
             // Ser verifica que dicha celda no posea un valor o este marcada como 'disponible' (Después de la Eliminación) para mantener consistencia
-            if (buckets[hash] == null || buckets[hash] == AVAILABLE) {
-                buckets[hash] = wrappedInt;
+            if (buckets[hash] == null || buckets[hash].getDNI().equals(AVAILABLE)) {
+                buckets[hash] = key;
                 size++;
                 return;
             }
@@ -172,6 +154,4 @@ public class HashLinearProbing {
 
         tb.displayHashtable();        
     }
-
-    */
 }
