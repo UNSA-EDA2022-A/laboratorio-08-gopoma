@@ -9,8 +9,16 @@ public class Persona {
         this.nombre = nombre;
     }
 
+    public void setDNI(String DNI) {
+        this.DNI = DNI;
+    }
+
     public String getDNI() {
         return this.DNI;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {

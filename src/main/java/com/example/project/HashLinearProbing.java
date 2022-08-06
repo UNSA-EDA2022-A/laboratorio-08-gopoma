@@ -31,7 +31,7 @@ public class HashLinearProbing {
         return size == hsize;
     }
 
-    // key->wrappedInt viene a ser un valor que se intertará como valor, cuya clave en la tabla hash será hashing(key)->[0,hsize-1]
+    // key->Persona viene a ser un valor que se intertará como valor, cuya clave en la tabla hash será hashing(key)->[0,hsize-1]
     public void insertHash(Persona key) {
         if (isFull()) {
             System.out.println("Tabla hash esta llena!");
@@ -70,9 +70,8 @@ public class HashLinearProbing {
         return response;
     }
 
-    // key->wrappedInt cumple el rol de valor en la tabla hash, hashing(key)->'hash' cumple el rol de clave
-    public void deleteHash(int key) {
-        Integer wrappedInt = key;
+    // key->Persona cumple el rol de valor en la tabla hash, hashing(key)->'hash' cumple el rol de clave
+    public void deleteHash(String key) {
         int hash = hashing(key);
 
         if (isEmpty()) {
@@ -83,9 +82,9 @@ public class HashLinearProbing {
         // En Lineal Probing, se realizan como máximo 'hsize' saltitos al momento de verificar valores
         for (int i = 0; i < hsize; i++) {
             // Verificamos que buckets[hash] no sea nulo para evitar el NullPointerException y que el valor cuya posición es buckets[hashing(key)] coincida con key
-            if (buckets[hash] != null && buckets[hash].equals(wrappedInt)) {
+            if (buckets[hash] != null && buckets[hash].getDNI().equals(key)) {
                 // Lo marcamos como 'disponible' para no perder consistencia en la búsqueda y para que pueda ser asignado en la inserción
-                buckets[hash] = AVAILABLE;
+                buckets[hash].setDNI(AVAILABLE);
                 size--;
                 return;
             }
@@ -98,7 +97,7 @@ public class HashLinearProbing {
             }
         }
         // Exceder los 'hsize' saltitos indica que no se encontró la clave hashing(key)->'hash'
-        System.out.println("Clave " + hashing(key) + " no encontrada");
+        System.out.println("Clave " + key + " no encontrada");
     }
 
     public void displayHashtable() {
