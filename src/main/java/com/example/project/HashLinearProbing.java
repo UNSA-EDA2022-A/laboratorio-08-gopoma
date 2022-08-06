@@ -20,7 +20,7 @@ public class HashLinearProbing {
         int input = 0;
 
         for(char ch: key.toCharArray()) { 
-            input ^= ch; 
+            input ^= ch; // XOR for String values
         }
 
         int hash = input % hsize;
